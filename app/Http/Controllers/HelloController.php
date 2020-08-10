@@ -15,7 +15,14 @@ class HelloController extends Controller
     }
 
     public function services(){
-    
-        return view('services');
+        $services = [
+            'Service 1',
+            'Service 2',
+            'Service 3',
+            'Service 4',
+        ];
+        
+        //compact() if we're gonna use the same name as the variable
+        return view('services', compact('services'));
     }
 }

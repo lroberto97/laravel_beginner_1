@@ -9,8 +9,9 @@ with the following text, we use this just for one simple text --}}
 
     {{-- ul>li{Services $}*3 shortcut emmet --}}
     <ul>
-        <li>Services 1</li>
-        <li>Services 2</li>
-        <li>Services 3</li>
+        {{-- Using for each to print every service in our array --}}
+        @foreach ($services as $service)
+        <li>{{ $service }}</li>
+        @endforeach
     </ul>
 @endsection
