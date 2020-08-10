@@ -18,4 +18,5 @@ Route::get('/', function () {
 });
 
 /*As second parameter we pass the ControllerName@functionOfController*/ 
-Route::get('/hello', 'HelloController@index');
+Route::get('/about', 'HelloController@about');
+Route::get('/services', 'HelloController@services');
