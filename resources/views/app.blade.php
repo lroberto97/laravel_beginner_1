@@ -9,7 +9,10 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <h1>Welcome to Laravel 6</h1>
-    <p>With some additional text.</p>
+    <ul>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/services">Services</a></li>
+    </ul>
+    @yield('content')
 </body>
 </html>
