@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>Welcome to Laravel 6</h1>
+    <p>With some additional text.</p>
 </body>
 </html>
