@@ -18,11 +18,10 @@ Route::get('/', function () {
 });
 
 Route::get('/hello', function(){
-    $variable = 'Hello from Routes AGAIN';
+    $coolString = 'Hello from Routes AGAIN';
     
-    /*view() accept a second parameter, which is the data we're gonna pass to our view
-    into an array*/
-    return view('subviews.hello', [
-        'someData' => $variable
-    ]);
+    /*view() accept a second parameter, which is the data we're gonna pass to our view.
+    If the variable's name is the same as the name in the array, we can use the function 
+    compact() as a shortcut, and this will generate the exact same array as we had before*/
+    return view('subviews.hello', compact('coolString'));
 });
