@@ -9,10 +9,10 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <ul>
-        <li><a href="/about">About Us</a></li>
-        <li><a href="/services">Services</a></li>
-    </ul>
+    {{-- We use include to include html from another view, the difference with exteds
+    is that extends is used as a base for our template and include is included in some part of 
+    our template --}}
+    @include('nav')
     @yield('content')
 </body>
 </html>
