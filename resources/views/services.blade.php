@@ -9,9 +9,12 @@ with the following text, we use this just for one simple text --}}
 
     {{-- ul>li{Services $}*3 shortcut emmet --}}
     <ul>
-        {{-- Using for each to print every service in our array --}}
-        @foreach ($services as $service)
-        <li>{{ $service }}</li>
-        @endforeach
+        {{-- Using for else to print every service in our array, if
+        there is no services, the empy is gonna be printed--}}
+        @forelse ($services as $service)
+            <li>{{ $service }}</li>
+        @empty
+            <li>No services available</li>
+        @endforelse
     </ul>
 @endsection
