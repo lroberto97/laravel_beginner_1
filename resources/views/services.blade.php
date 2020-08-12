@@ -12,7 +12,10 @@ with the following text, we use this just for one simple text --}}
         {{-- Using for else to print every service in our array, if
         there is no services, the empy is gonna be printed--}}
         @forelse ($services as $service)
-            <li>{{ $service }}</li>
+            {{-- We use name because service is an object
+                we can use the id or created_at, uopdated_at,
+                the fields we have in our db --}}
+            <li>{{ $service->name }}</li>
         @empty
             <li>No services available</li>
         @endforelse

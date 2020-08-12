@@ -15,13 +15,8 @@ class HelloController extends Controller
     }
 
     public function services(){
-        $services = [
-            'Service 1',
-            'Service 2',
-            'Service 3',
-            'Service 4',
-        ];
-        
+        //This way we can bring all services in our db
+        $services = \App\Service::all();
         //compact() if we're gonna use the same name as the variable
         return view('services', compact('services'));
     }
