@@ -20,11 +20,9 @@ class ServiceController extends Controller
             //Use | to add another validation, in this case min 5 characters
             'name' => 'required|min:5'
         ]);
-        /* Create a new service, add the name from the request to the new service
-        save the service in th DB */
-        $service = new \App\Service();
-        $service->name = request('name');
-        $service->save();
+        /* Only works if tha input name we're receiving is the same as the DB field
+        and we need to enable mass assignment */
+        \App\Service::create($data);
         //Returning to the same page
         return redirect()->back();
     }
