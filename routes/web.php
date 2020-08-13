@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*As second parameter we pass the ControllerName@functionOfController*/ 
+/*As second parameter we pass the ControllerName@functionOfController*/
 Route::get('/about', 'HelloController@about');
-Route::get('/services', 'ServiceController@index'); 
+Route::get('/service', 'ServiceController@index');
+Route::post('/service', 'ServiceController@store');
