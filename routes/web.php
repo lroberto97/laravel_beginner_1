@@ -19,4 +19,4 @@ Route::get('/', function () {
 
 /*As second parameter we pass the ControllerName@functionOfController*/ 
 Route::get('/about', 'HelloController@about');
-Route::get('/services', 'HelloController@services'); 
+Route::get('/services', 'ServiceController@index'); 
