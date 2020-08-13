@@ -30,9 +30,11 @@ class CustomerController extends Controller
     }
 
     /* Recieving parameter from url */
-    public function show($customerId){
-        /* Find the customer with the given id, if not sends 404 */
-        $customer = \App\Customer::findOrFail($customerId);
+    /* This is route model binding, laravel try to find that customer in our DB,
+    if is not then send 404, is the same as findOrFail, see previous commit,
+    if is found then send it to our view with the same name 'customer',
+    parameter in the route and in the mehtod need same name */
+    public function show(\App\Customer $customer){
         return view('customer.show', compact('customer'));
     }
 }
