@@ -28,4 +28,11 @@ class CustomerController extends Controller
 
         return redirect('/customers');
     }
+
+    /* Recieving parameter from url */
+    public function show($customerId){
+        /* Find the customer with the given id, if not sends 404 */
+        $customer = \App\Customer::findOrFail($customerId);
+        return view('customer.show', compact('customer'));
+    }
 }
