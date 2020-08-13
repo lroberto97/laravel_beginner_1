@@ -28,3 +28,5 @@ Route::get('/customers/create', 'CustomerController@create');
 Route::post('/customers', 'CustomerController@store');
 /* Sending parameters in url */
 Route::get('/customers/{customer}', 'CustomerController@show');
+Route::get('/customers/{customer}/edit', 'CustomerController@edit');
+Route::patch('/customers/{customer}', 'CustomerController@update');
