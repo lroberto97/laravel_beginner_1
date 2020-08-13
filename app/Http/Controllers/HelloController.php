@@ -13,11 +13,4 @@ class HelloController extends Controller
         compact() as a shortcut, and this will generate the exact same array as we had before*/
         return view('about');
     }
-
-    public function services(){
-        //This way we can bring all services in our db
-        $services = \App\Service::all();
-        //compact() if we're gonna use the same name as the variable
-        return view('services', compact('services'));
-    }
 }
