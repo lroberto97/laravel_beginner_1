@@ -36,7 +36,8 @@ class CustomerController extends Controller
         remeber we need to import the necessary to use Mail and
         WelcomeMail() at the top of the controller */
         Mail::to($customer->email)->send(new WelcomeMail());
-        return redirect('/customers/'.$customer->id);
+        //Redirecting to rout customers.show
+        return redirect()->route('customers.show', ['customer' => $customer->id]);
     }
 
     /* Recieving parameter from url */
@@ -56,14 +57,14 @@ class CustomerController extends Controller
         /* Update data with update() */
         $customer->update($this->validatedData());
 
-        return redirect('/customers');
+        return redirect()->route('customers.index');
     }
 
     public function destroy(Customer $customer){
         /* Delete data with delete() */
         $customer->delete();
 
-        return redirect('/customers');
+        return redirect()->route('customers.index');
     }
 
     protected function validatedData(){
