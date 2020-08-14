@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+/* Returning a mailable class, this return the mail view in the route defined */
+Route::get('/email', function () {
+    /* Enviamos un nuevo email a la cuenta email@email.com desde nuestra cuenta
+    de mailtrap que configuramos en el .env */
+    Mail::to('email40@email.com')->send(new WelcomeMail());
+    return new WelcomeMail();
 });
 
 /*As second parameter we pass the ControllerName@functionOfController*/
