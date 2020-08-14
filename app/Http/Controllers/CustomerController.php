@@ -12,7 +12,9 @@ class CustomerController extends Controller
         //Get all customers from DB
         //$customers = Customer::all();
         //Get all active customers
-        $customers = Customer::where('active', 1)->get();
+        /*request()->query('active', 1) is ?active=1 value in URL, in this example 1
+        the value before the comma is the default*/
+        $customers = Customer::where('active', request()->query('active', 1))->get();
 
         return view('customer.index', compact('customers'));
     }
