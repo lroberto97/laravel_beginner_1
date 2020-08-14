@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use \App\Customer;
+use App\Mail\WelcomeMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
@@ -22,6 +24,7 @@ class CustomerController extends Controller
     public function create(){
         //Adding a blank customer for the old() method in the form
         $customer = new Customer();
+
         return view('customer.create', compact('customer'));
     }
 
@@ -29,7 +32,10 @@ class CustomerController extends Controller
         /* Create method returns the customer created, so we can acces at its
         properties */
         $customer = Customer::create($this->validatedData());
-
+        /* Sending mail to our customer email when is storage in db
+        remeber we need to import the necessary to use Mail and
+        WelcomeMail() at the top of the controller */
+        Mail::to($customer->email)->send(new WelcomeMail());
         return redirect('/customers/'.$customer->id);
     }
 
