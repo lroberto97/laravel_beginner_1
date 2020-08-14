@@ -10,7 +10,9 @@ class CustomerController extends Controller
     //
     public function index(){
         //Get all customers from DB
-        $customers = Customer::all();
+        //$customers = Customer::all();
+        //Get all active customers
+        $customers = Customer::where('active', 1)->get();
 
         return view('customer.index', compact('customers'));
     }
