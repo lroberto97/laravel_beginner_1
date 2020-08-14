@@ -20,9 +20,11 @@ class CustomerController extends Controller
     }
 
     public function store(){
-        Customer::create($this->validatedData());
+        /* Create method returns the customer created, so we can acces at its
+        properties */
+        $customer = Customer::create($this->validatedData());
 
-        return redirect('/customers');
+        return redirect('/customers/'.$customer->id);
     }
 
     /* Recieving parameter from url */
