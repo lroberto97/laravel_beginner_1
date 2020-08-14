@@ -28,11 +28,22 @@ Route::get('/about', 'HelloController@about');
 Route::get('/service', 'ServiceController@index');
 Route::post('/service', 'ServiceController@store');
 
-Route::get('/customers', 'CustomerController@index');
-Route::get('/customers/create', 'CustomerController@create');
-Route::post('/customers', 'CustomerController@store');
-/* Sending parameters in url */
-Route::get('/customers/{customer}', 'CustomerController@show');
-Route::get('/customers/{customer}/edit', 'CustomerController@edit');
-Route::patch('/customers/{customer}', 'CustomerController@update');
-Route::delete('/customers/{customer}', 'CustomerController@destroy');
+/* group´receive as a first parameter the groups is gonna use
+in this case prefix which is gonna insert 'customers' at the beginning of
+every route so we do'nt need to write it in every one and name which is
+gonna insert 'customers.' at the beginning of every route name*/
+Route::group([
+    'prefix' => 'customers',
+    'name' => 'customers.'
+    ],
+    function(){
+        Route::get('/', 'CustomerController@index')->name('index');
+        Route::get('/create', 'CustomerController@create')->name('create');
+        Route::post('/', 'CustomerController@store')->name('store');
+        /* Sending parameters in url */
+        Route::get('/{customer}', 'CustomerController@show')->name('show');
+        Route::get('/{customer}/edit', 'CustomerController@edit')->name('edit');
+        Route::patch('/{customer}', 'CustomerController@update')->name('update');
+        Route::delete('/{customer}', 'CustomerController@destroy')->name('destroy');
+});
+
