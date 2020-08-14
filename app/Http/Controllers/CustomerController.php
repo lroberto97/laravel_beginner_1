@@ -16,7 +16,9 @@ class CustomerController extends Controller
     }
 
     public function create(){
-        return view('customer.create');
+        //Adding a blank customer for the old() method in the form
+        $customer = new Customer();
+        return view('customer.create', compact('customer'));
     }
 
     public function store(){
