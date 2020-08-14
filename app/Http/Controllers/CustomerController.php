@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use \App\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -9,7 +10,7 @@ class CustomerController extends Controller
     //
     public function index(){
         //Get all customers from DB
-        $customers = \App\Customer::all();
+        $customers = Customer::all();
 
         return view('customer.index', compact('customers'));
     }
@@ -19,7 +20,7 @@ class CustomerController extends Controller
     }
 
     public function store(){
-        \App\Customer::create($this->validatedData());
+        Customer::create($this->validatedData());
 
         return redirect('/customers');
     }
@@ -29,22 +30,22 @@ class CustomerController extends Controller
     if is not then send 404, is the same as findOrFail, see previous commit,
     if is found then send it to our view with the same name 'customer',
     parameter in the route and in the mehtod need same name */
-    public function show(\App\Customer $customer){
+    public function show(Customer $customer){
         return view('customer.show', compact('customer'));
     }
 
-    public function edit(\App\Customer $customer){
+    public function edit(Customer $customer){
         return view('customer.edit', compact('customer'));
     }
 
-    public function update(\App\Customer $customer){
+    public function update(Customer $customer){
         /* Update data with update() */
         $customer->update($this->validatedData());
 
         return redirect('/customers');
     }
 
-    public function destroy(\App\Customer $customer){
+    public function destroy(Customer $customer){
         /* Delete data with delete() */
         $customer->delete();
 
