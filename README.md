@@ -1,7 +1,7 @@
 # Laravel Web App
 This  application was build to learn the basics of Laravel Framework, following Coders Tape course.
 
-##Build with
+## Build with
 - Laravel Framework 7.24
 
 
