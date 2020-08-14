@@ -1,0 +1,120 @@
+* APUNTES LARAVEL BEGINNER
+
+Crear un nuevo proyecto laravel
+>> laravel new project_name
+
+Correr el servidor
+>> php artisan serve
+
+Laravel usa views, para retornar la vista con el html, solo usa el nombre, y si está en una subcarpeta, utiliza .
+return view('subviews.welcome');
+
+Create a controller with artisan
+>>php artisan make:controller NameController
+
+Template sintax
+{{-- With extends('name') we call the view we want to include --}}
+@extends('app')
+{{-- section() allows to change the yield we defined in the view we're extending
+with the following text, we use this just for one simple text --}}
+@section('title', 'About Us Page')
+{{-- For more than a text, for example html, we use @endsection to
+enclose a full section --}}
+@section('content')
+    <h1>Welcome to Laravel 6</h1>
+    <p>With some aditional text.</p>
+@endsection
+
+For else VS for each
+{{-- Using for each to print every service in our array --}}
+@foreach ($services as $service)
+	<li>{{ $service }}</li>
+@endforeach
+
+{{-- Using for else to print every service in our array, if
+there is no services, the empy is gonna be printed--}}
+@forelse ($services as $service)
+    <li>{{ $service }}</li>
+@empty
+    <li>No services available</li>
+@endforelse
+
+*NOTA: Las configuraciones de laravel y la DB que usará están en el archivo .env
+
+Crear modelo (Es el nombre que qeuramos con la primera en mayúscula)
+>> php artisan make:model Nombre
+
+Crear migración para el modelo
+(El nombre que le pondremos a la migración --create nombre_de_la_tabla_que _creará)
+>> php artisan make:migration creates_services_table --create services
+
+*NOTA: Podemos crear el modelo, el controlador y la migración al mismo tiempo con el siguiente comando
+>> php artisan make:model Nombre -cm
+
+*NOTA: dd(algo) nos permite imprimir en el navegador
+
+*NOTA: Las validaciones están en validation section laravel
+//name is gonna be required so it can't be empty
+//Use | to add another validation, in this case min 5 characters
+'name' => 'required|min:5'
+
+*NOTA:
+/* Only works if tha input name we're receiving is the same as the DB field
+and we need to enable mass assignment */
+\App\Service::create($data);
+
+*NOTA: 
+Adding ->nullable() at the end of the fields in migrations, makes it optiotal.
+
+*NOTA: Para hacer buenas rutas y nombrar urls ve los siguientes enlaces
+https://laravel.com/docs/7.x/routing
+https://laravel.com/docs/7.x/urls
+
+Abrir una terminal para interactuar con nuestro proyecto.
+>> php artisan tinker
+
+Traer una coleccion ('campo', 'igual_a')
+>> $customer = \App\Customer::where('id', 1)->get();
+
+Traer un solo objeto ('campo', 'igual_a')
+>> $customer = \App\Customer::where('id', 1)->frst();
+
+Borra la DB y corre de nuevo las migraciones
+>> php artisan migrate:fresh
+
+*NOTA: La diferencia entre find() y where() es que find busca solo por la llave primaria
+
+*NOTA: 
+function algo(Request $request){} es lo mismo que usar function algo(){ request()}
+El helper function request() es lo mismo que traerlo en el parametro con Request $request, trabajan de la misma manera
+
+EMAILS
+Crear una clase mailable para enviar emails, WelcomeMail es el nombre de la clase e emails.welcom es donde se almacenará la vista html del mail
+>> php artisan make:mail WelcomeMail -m emails.welcome
+
+To change the title of the mail Laravel to something else we need to change the APP_NAME in .env
+
+Para enviar un correo usamos el servicio de mailtrap así que tenemos que crear una cuenta y añadir nuestro mail user y password en el .env
+
+Para enviarlo necesitamos 
+use Illuminate\Support\Facades\Mail;
+
+Y para las pruebas necesitamos eliminar MAIL_FROM_ADDRESS en nuestro .env
+
+NOMBRANDO RUTAS
+Para nombrar las rutas una forma es hacerlo con name 
+Route::get('/', 'CustomerController@index')->name('index');
+Otra es con as
+Route::get('/{customer}', ['as'=>'show', 'CustomerController@show']);
+
+Pero cuando queremos nombrar en un grupo de rutas y los nombres llebarán un prefijo, la mejor forma es
+hacerlo con 'as', ya que de esta forma nos ahorramos poner el prefijo 'customer.' en todas las rutas
+
+Route::group([
+    'prefix' => 'customers',
+    'as' => 'customers.'
+    ],
+    function(){
+        Route::get('/{customer}', ['as'=>'show', 'CustomerController@show']);
+        Route::get('/{customer}/edit', ['as'=>'edit', 'CustomerController@edit']);
+});
