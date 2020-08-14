@@ -9,9 +9,9 @@
 <p>{{ $customer->email }}</p>
 
 <div>
-    <a href="/customers/{{ $customer->id }}/edit">Edit</a>
+    <a href="{{ route('customers.edit', ['customer' => $customer->id]) }}">Edit</a>
 
-    <form action="/customers/{{$customer->id}}" method="post">
+    <form action="{{ route('customers.destroy', ['customer' => $customer->id]) }}" method="post">
         @csrf
         @method('DELETE')
         <button>Delete</button>
